@@ -1,1 +1,340 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miza Ressources | Apprendre le français</title>
+
+<style>
+:root {
+  --mint: #DCEDE5;
+  --sage: #A7CBB8;
+  --green: #527C6B;
+  --cream: #F8F6EF;
+  --dark: #263F37;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+}
+
+header {
+  background: white;
+  padding: 18px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--green);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--dark);
+  margin: 8px;
+  font-size: 14px;
+}
+
+nav a:hover { color: var(--green); }
+
+.hero {
+  padding: 75px 8%;
+  background: var(--mint);
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--green);
+  color: white;
+  padding: 13px 25px;
+  border-radius: 25px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+section { padding: 55px 8%; }
+
+.section-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 4px 15px #263f3710;
+  transition: .2s;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+.emoji { font-size: 40px; }
+
+.card button {
+  background: var(--sage);
+  color: var(--dark);
+  border: none;
+  padding: 10px 17px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.resource {
+  display: none;
+  background: var(--mint);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.resource.active { display: block; }
+
+.quiz-box, .bot-box {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  max-width: 650px;
+  margin: auto;
+}
+
+.quiz-box button {
+  display: block;
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid var(--sage);
+  border-radius: 10px;
+  background: var(--cream);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+#chat {
+  height: 220px;
+  overflow-y: auto;
+  background: var(--cream);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--sage);
+  border-radius: 10px;
+}
+
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+@media(max-width:600px) {
+  header { justify-content: center; }
+  nav { text-align: center; }
+  nav a { display: inline-block; }
+  .hero { padding: 55px 6%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🌿 Miza Ressources</div>
+  <nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#ressources">Ressources</a>
+    <a href="#quiz">Révisions</a>
+    <a href="#assistant">MizaBot</a>
+  </nav>
+</header>
+
+<div class="hero" id="accueil">
+  <h1>Bienvenue sur Miza Ressources ! 🌿</h1>
+  <p>Apprends le français à ton rythme.<br>
+  Découvre, entraîne-toi et progresse chaque jour !</p>
+  <a class="btn" href="#ressources">Découvrir les ressources</a>
+</div>
+
+<section id="ressources">
+  <h2 class="section-title">📚 Explore nos ressources</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="emoji">📖</div>
+      <h3>Grammaire</h3>
+      <p>Comprends les règles et construis de belles phrases.</p>
+      <button onclick="showResource('grammaire')">Découvrir</button>
+    </div>
+
+    <div class="card">
+      <div class="emoji">🌱</div>
+      <h3>Vocabulaire</h3>
+      <p>Enrichis ton vocabulaire et découvre de nouveaux mots.</p>
+      <button onclick="showResource('vocabulaire')">Découvrir</button>
+    </div>
+
+    <div class="card">
+      <div class="emoji">💬</div>
+      <h3>Communication</h3>
+      <p>Apprends à communiquer dans la vie quotidienne.</p>
+      <button onclick="showResource('communication')">Découvrir</button>
+    </div>
+
+    <div class="card">
+      <div class="emoji">🎯</div>
+      <h3>Activités de révision</h3>
+      <p>Teste tes connaissances avec des exercices amusants.</p>
+      <button onclick="showResource('revision')">Découvrir</button>
+    </div>
+
+  </div>
+
+  <div id="grammaire" class="resource">
+    <h3>📖 Grammaire</h3>
+    <p>Le passé composé : auxiliaire être ou avoir + participe passé.</p>
+    <p>Exemple : J'ai mangé une pomme.</p>
+  </div>
+
+  <div id="vocabulaire" class="resource">
+    <h3>🌱 Vocabulaire</h3>
+    <p>Thème : les émotions.</p>
+    <p>Heureux, triste, inquiet, enthousiaste, surpris.</p>
+  </div>
+
+  <div id="communication" class="resource">
+    <h3>💬 Communication</h3>
+    <p>Pour demander son chemin :</p>
+    <p>« Excusez-moi, où se trouve la gare ? »</p>
+  </div>
+
+  <div id="revision" class="resource">
+    <h3>🎯 Révisions</h3>
+    <p>Retrouve le quiz ci-dessous pour tester tes connaissances !</p>
+    <a href="#quiz">Faire le quiz</a>
+  </div>
+</section>
+
+<section id="quiz" style="background:var(--mint)">
+  <h2 class="section-title">🎯 Petit quiz de français</h2>
+  <div class="quiz-box">
+    <h3>Choisis la bonne réponse :</h3>
+    <p>Hier, je ______ au cinéma.</p>
+    <button onclick="checkAnswer(this, false)">vais</button>
+    <button onclick="checkAnswer(this, true)">suis allé(e)</button>
+    <button onclick="checkAnswer(this, false)">irai</button>
+    <p id="result"></p>
+  </div>
+</section>
+
+<section id="assistant">
+  <h2 class="section-title">🤖 Ton assistant MizaBot</h2>
+  <div class="bot-box">
+    <p>Bonjour ! Je suis MizaBot. Pose-moi une question sur le français ! 😊</p>
+    <div id="chat">
+      <p><b>MizaBot :</b> Bonjour ! Comment puis-je t'aider aujourd'hui ?</p>
+    </div>
+    <div class="chat-input">
+      <input id="question" placeholder="Écris ta question...">
+      <button class="btn" onclick="sendMessage()">Envoyer</button>
+    </div>
+    <small>MizaBot est ici en version démonstration. La connexion à une IA sera ajoutée ultérieurement.</small>
+  </div>
+</section>
+
+<footer>
+  <h3>🌿 Miza Ressources</h3>
+  <p>Apprendre le français à son rythme.</p>
+  <p>© 2026 Miza Ressources</p>
+</footer>
+
+<script>
+function showResource(id) {
+  document.querySelectorAll('.resource').forEach(el => {
+    el.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+}
+
+function checkAnswer(button, correct) {
+  const result = document.getElementById('result');
+  result.textContent = correct
+    ? "Bravo ! 🎉 C'est la bonne réponse !"
+    : "Essaie encore ! Tu peux y arriver 💪";
+  result.style.color = correct ? "#527C6B" : "#a34d42";
+}
+
+function sendMessage() {
+  const input = document.getElementById('question');
+  const chat = document.getElementById('chat');
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  chat.innerHTML += '<p><b>Toi :</b> ' + escapeHTML(message) + '</p>';
+  chat.innerHTML += '<p><b>MizaBot :</b> Je suis actuellement en version démonstration. Bientôt, je pourrai répondre à tes questions et t'aider à apprendre le français ! 🌱</p>';
+
+  input.value = '';
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function escapeHTML(text) {
+  return text.replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+}
+</script>
+
+</body>
+</html>
+
